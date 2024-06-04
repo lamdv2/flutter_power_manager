@@ -25,6 +25,8 @@ class HomeTabController extends GetxController
   final listAnswers = Rxn<List<String>>();
   final listBestAnswers = Rxn<List<String>>([]);
   final bestAnswer = Rxn<String>('');
+  final isCheckOn = RxBool(false);
+  final isCheckOff = RxBool(false);
 
   @override
   void onInit() {

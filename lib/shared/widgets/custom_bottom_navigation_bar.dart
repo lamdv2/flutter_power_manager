@@ -25,7 +25,9 @@ class CustomBottomNavigationBar extends StatefulWidget {
     required this.onTabSelected,
     required this.selectedIndex,
   }) {
-    assert(this.items.length == 2 || this.items.length == 4);
+    assert(this.items.length == 1 ||
+        this.items.length == 2 ||
+        this.items.length == 4);
   }
 
   final List<BottomBarItem> items;

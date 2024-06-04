@@ -1,14 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_base/modules/message/message.dart';
 import 'package:get/get.dart';
 
 import '../../app_controller.dart';
 import '../../shared/constants/colors.dart';
 import '../../shared/constants/common.dart';
 import '../../shared/widgets/custom_bottom_navigation_bar.dart';
-import '../categogy/category_screen.dart';
 import '../home/home_tab_screen.dart';
 import 'home_controller.dart';
 
@@ -61,24 +59,6 @@ class HomeScreen extends GetView<HomeController> {
                 : controller.imagePaths[0],
             text: CommonConstants.home.tr,
           ),
-          BottomBarItem(
-            iconData: controller.bottomNavIndex.value == 1
-                ? controller.bottomNavSelectedIconPaths[1]
-                : controller.imagePaths[1],
-            text: "Categories".tr,
-          ),
-          BottomBarItem(
-            iconData: controller.bottomNavIndex.value == 2
-                ? controller.bottomNavSelectedIconPaths[2]
-                : controller.imagePaths[2],
-            text: "History".tr,
-          ),
-          BottomBarItem(
-            iconData: controller.bottomNavIndex.value == 3
-                ? controller.bottomNavSelectedIconPaths[3]
-                : controller.imagePaths[3],
-            text: CommonConstants.profile.tr,
-          ),
         ],
       ),
     );
@@ -87,8 +67,6 @@ class HomeScreen extends GetView<HomeController> {
   List<Widget> _widgetOptions() {
     return [
       HomeTabScreen(),
-      CategoryScreen(),
-      MessageScreen(),
     ];
   }
 }

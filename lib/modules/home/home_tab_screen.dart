@@ -16,6 +16,14 @@ import 'home_tab_controller.dart';
 class HomeTabScreen extends GetView<HomeTabController> {
   final AppController appController = Get.find();
 
+  void _handleSwitchChangeOn(bool newValue) {
+    controller.isCheckOn.value = newValue;
+  }
+
+  void _handleSwitchChangeOff(bool newValue) {
+    controller.isCheckOff.value = newValue;
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -32,30 +40,101 @@ class HomeTabScreen extends GetView<HomeTabController> {
             body: Padding(
               padding: EdgeInsets.all(getSize(20)),
               child: SingleChildScrollView(
-                child: Obx(
-                  () => Stack(
-                    children: [
-                      controller.listQuestions.value != null &&
-                              controller.listQuestions.value?.length != 0
-                          ? controller.isCheckFinish.value
-                              ? ResultWidget(
-                                  controller: controller,
-                                )
-                              : QuizGameWidget(controller: controller)
-                          : Center(
-                              child: LoadingAnimation(),
+                child: Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        'Set a timer to turn the device on and off',
+                        style: AppStyles.black000Size16Fw400FfNunito,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: getSize(10)),
+                      child: Row(
+                        children: [
+                          Text('Thời gian mở'),
+                          Spacer(),
+                          Obx(
+                            () => Switch(
+                              value: controller.isCheckOn.value,
+                              onChanged: _handleSwitchChangeOn,
                             ),
-                      controller.isCheckLoading.value
-                          ? Positioned(
-                              top: 0,
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: LoadingAnimation(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Obx(
+                      () => controller.isCheckOn.value
+                          ? Padding(
+                              padding: EdgeInsets.only(top: getSize(10)),
+                              child: Row(
+                                children: [
+                                  Text('Thời gian mở'),
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '7: 00',
+                                        style: TextStyle(
+                                          color: ColorConstants.darkGray,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.arrow_right_sharp,
+                                        color: ColorConstants.darkGray,
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
                             )
                           : SizedBox.shrink(),
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: getSize(50),
+                      ),
+                      child: Row(
+                        children: [
+                          Text('Thời gian tắt'),
+                          Spacer(),
+                          Obx(
+                            () => Switch(
+                              value: controller.isCheckOff.value,
+                              onChanged: _handleSwitchChangeOff,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Obx(
+                      () => controller.isCheckOff.value
+                          ? Padding(
+                              padding: EdgeInsets.only(top: getSize(10)),
+                              child: Row(
+                                children: [
+                                  Text('Thời gian tắt'),
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '7: 00',
+                                        style: TextStyle(
+                                          color: ColorConstants.darkGray,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.arrow_right_sharp,
+                                        color: ColorConstants.darkGray,
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            )
+                          : SizedBox.shrink(),
+                    ),
+                  ],
                 ),
               ),
             ),
